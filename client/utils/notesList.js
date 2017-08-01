@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 export default class NotesList extends React.Component {
@@ -25,6 +26,22 @@ export default class NotesList extends React.Component {
             )
           })
         }
+        <NoteForm/>
+      </div>
+    )
+  }
+}
+
+class NoteForm extends React.Component {
+  render() {
+    return (
+      <div className="note-form-container hidden">
+        <form>
+          <input name="note-title"></input>
+          <textarea name="note-content" className="note-form-textarea"></textarea>
+        </form>
+        <button className="form-button" type="button">Cancel</button>
+        <button className="form-button" type="submit">Submit</button>
       </div>
     )
   }
@@ -34,4 +51,14 @@ async function getNotes() {
   const fetchedNotes = await fetch('http://localhost:3000/notes/')
   const notes = await fetchedNotes.json()
   return notes
+}
+
+function extractFormData(event) {
+  event.preventDefault()
+  const form = new FormData(event.target)
+  const noteData = {
+    title: form.get('note-title'),
+    content: form.get('note-content')
+  }
+  return noteData
 }
