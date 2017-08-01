@@ -10,8 +10,8 @@
     "lint:js": "eslint ./**/*.js",
     "test": "npm run lint",
     "precommit": "npm test",
-    "bundle": "browserify -t babelify index.js -o main.js",
-    "bundle:watch": "watchify -t babelify index.js -o main.js",
+    "bundle": "browserify -t babelify client/main.js -o server/public/bundle.js",
+    "bundle:watch": "watchify -t babelify client/main.js -o server/public/bundle.js",
     "watch": "nodemon server/index.js"
   },
   "keywords": [],
