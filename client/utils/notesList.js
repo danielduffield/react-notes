@@ -38,10 +38,12 @@ class NoteForm extends React.Component {
       <div className="note-form-container">
         <form onSubmit={submitNote}>
           <input name="note-title"></input>
+          <br />
           <textarea name="note-content" className="note-form-textarea"></textarea>
+          <br />
+          <button className="btn btn-default" type="button">Cancel</button>
+          <button className="btn btn-default" type="submit">Submit</button>
         </form>
-        <button className="form-button" type="button">Cancel</button>
-        <button className="form-button" type="submit">Submit</button>
       </div>
     )
   }
@@ -63,8 +65,10 @@ function extractFormData(event) {
 }
 
 async function submitNote(event) {
+  console.log('Submitted')
   event.preventDefault()
   const noteData = extractFormData(event)
+  console.log('note data: ', noteData)
   const response = await fetch('http://localhost:3000/note-submit-request', {
     method: 'POST',
     headers: {
@@ -73,5 +77,6 @@ async function submitNote(event) {
     },
     body: JSON.stringify(noteData)
   })
-  console.log(response)
+  const currentId = await response.json()
+  console.log(currentId)
 }
