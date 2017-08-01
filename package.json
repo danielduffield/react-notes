@@ -12,7 +12,8 @@
     "precommit": "npm test",
     "bundle": "browserify -t babelify client/main.js -o server/public/bundle.js",
     "bundle:watch": "watchify -t babelify client/main.js -o server/public/bundle.js",
-    "watch": "nodemon server/index.js"
+    "watch:server": "nodemon server/index.js",
+    "watch": "run-p watch:server bundle:watch"
   },
   "keywords": [],
   "author": "",
