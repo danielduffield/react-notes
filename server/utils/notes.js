@@ -8,7 +8,11 @@ async function getNotes() {
   catch (error) {
     console.log(error)
   }
+  console.log(notes)
   return notes
 }
 
-module.exports = getNotes()
+const notes = getNotes()
+console.log(notes)
+
+module.exports = notes
