@@ -2,9 +2,9 @@ const express = require('express')
 const app = express()
 const notes = require('./utils/notes.js')
 
-// app.use(express.static('server/public'))
+app.use(express.static('server/public'))
 
-app.get('/', async (req, res) => {
+app.get('/notes/', async (req, res) => {
   const noteList = await notes
   const jsonNotes = JSON.stringify(noteList)
   res.send(jsonNotes)
