@@ -35,8 +35,8 @@ export default class NotesList extends React.Component {
 class NoteForm extends React.Component {
   render() {
     return (
-      <div className="note-form-container hidden">
-        <form>
+      <div className="note-form-container">
+        <form onSubmit={submitNote}>
           <input name="note-title"></input>
           <textarea name="note-content" className="note-form-textarea"></textarea>
         </form>
@@ -73,6 +73,5 @@ async function submitNote(event) {
     },
     body: JSON.stringify(noteData)
   })
-  const updatedNotes = await response.json()
-  return updatedNotes
+  console.log(response)
 }
