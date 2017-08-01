@@ -6,7 +6,8 @@ const notes = require('./utils/notes.js')
 
 app.get('/', async (req, res) => {
   const noteList = await notes
-  res.send(noteList)
+  const jsonNotes = JSON.stringify(noteList)
+  res.send(jsonNotes)
 })
 
 app.listen(3000, () => console.log('Listening on 3000...'))
