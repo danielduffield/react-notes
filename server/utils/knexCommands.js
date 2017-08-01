@@ -3,8 +3,9 @@ const knex = require('knex')({
   connection: 'postgress://localhost:5432/occs'
 })
 
-function knexSelect(database) {
-  return knex.select().from(database)
+async function knexSelect(database) {
+  const query = await knex.select().from(database)
+  return query
 }
 
 module.exports = {
