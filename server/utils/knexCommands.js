@@ -7,6 +7,11 @@ function knexSelectAll(database) {
   return knex.select().from(database)
 }
 
+function knexInsert(database, noteData) {
+  return knex.insert(noteData).into(database)
+}
+
 module.exports = {
+  knexInsert: knexInsert,
   knexSelectAll: knexSelectAll
 }
