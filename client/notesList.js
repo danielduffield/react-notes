@@ -17,8 +17,7 @@ export default class NotesList extends React.Component {
           .map((note, index) => {
             return (
               <div className="note-container" key={index}>
-                <span className="note-id">{note.id}</span>
-                <h3 className="note-title">{note.title}</h3>
+                <h4 className="note-title"><span className="note-id">#{note.id}</span>{note.title}</h4>
                 <div className="note-text-container">
                   <p className="note-content">{note.content}</p>
                 </div>
