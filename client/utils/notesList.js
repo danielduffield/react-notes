@@ -54,11 +54,25 @@ async function getNotes() {
 }
 
 function extractFormData(event) {
-  event.preventDefault()
   const form = new FormData(event.target)
   const noteData = {
     title: form.get('note-title'),
     content: form.get('note-content')
   }
   return noteData
+}
+
+async function submitNote(event) {
+  event.preventDefault()
+  const noteData = extractFormData(event)
+  const response = await fetch('http://localhost:3000/note-submit-request', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(noteData)
+  })
+  const updatedNotes = await response.json()
+  return updatedNotes
 }
