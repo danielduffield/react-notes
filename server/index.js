@@ -6,7 +6,7 @@ const app = express()
 
 const getNotes = require('./utils/getNotes.js')
 const { getNextNoteId, incrementNextId } = require('./utils/noteId.js')
-const { knexInsert } = require('./utils/knexCommands.js')
+const { knexInsert, knexDelete } = require('./utils/knexCommands.js')
 
 app.use(jsonParser)
 app.use(express.static('server/public'))
@@ -18,16 +18,20 @@ app.get('/notes/', async (req, res) => {
   res.send(jsonNotes)
 })
 
-app.post('/note-submit-request/', (req, res) => {
+app.post('/note-submit-request/', async (req, res) => {
   const current = getNextNoteId()
   const noteData = req.body
   noteData.id = current
   incrementNextId()
-  knexInsert('notes', noteData)
-    .then(updatedNotes => {
-      res.status(201).json(updatedNotes)
-    })
-    .catch(error => console.log(error))
+  const updatedNotes = knexInsert('notes', noteData)
+  res.status(201).json(updatedNotes)
+})
+
+app.delete('/delete-note/:id', (req, res) => {
+  const noteToDelete = parseInt(req.params.id, 10)
+  knexDelete('notes', 'id', noteToDelete).then(() => {
+    res.sendStatus(204)
+  })
 })
 
 app.listen(3000, () => console.log('Listening on 3000...'))
