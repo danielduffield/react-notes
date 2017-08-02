@@ -19,7 +19,7 @@ export default class NotesComponent extends React.Component {
   render() {
     return (
       <div>
-        <NotesList notes={this.state.notes}/>
+        <NotesList notes={this.state.notes} updateList={this.updateList}/>
         <NoteForm notes={this.state.notes} updateList={this.updateList}/>
       </div>
     )
@@ -27,6 +27,17 @@ export default class NotesComponent extends React.Component {
 }
 
 class NotesList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.deleteNote = this.deleteNote.bind(this)
+  }
+  async deleteNote(event) {
+    const noteToDelete = event.target.dataset.noteid
+    const response = await fetch('http://localhost:3000/delete-note/' + noteToDelete, {
+      method: 'DELETE'
+    })
+    console.log(response)
+  }
   render() {
     console.log('prop notes ', this.props.notes)
     return (
@@ -38,8 +49,8 @@ class NotesList extends React.Component {
                 <h4 className="note-title">
                   <span className="note-id">#{note.id}</span>
                   {note.title}
-                  <button id={'note-' + note.id + '-delete-btn'} type="button"
-                    className="delete-button">X</button>
+                  <button data-noteid={note.id} type="button"
+                    className="delete-button" onClick={this.deleteNote}>X</button>
                 </h4>
                 <div className="note-text-container">
                   <p className="note-content">{note.content}</p>
