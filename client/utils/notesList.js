@@ -18,7 +18,6 @@ export default class NotesList extends React.Component {
     this.setState({notes: newState})
   }
   render() {
-    console.log('list renders')
     return (
       <div className="note-container">
         {this.state.notes
@@ -60,7 +59,6 @@ class NoteForm extends React.Component {
     const jsonResponse = await response.json()
     console.log(jsonResponse)
     const updatedNotes = await getNotes()
-    console.log(updatedNotes)
     this.props.updateList(updatedNotes)
   }
   render() {
