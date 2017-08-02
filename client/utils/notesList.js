@@ -4,14 +4,21 @@ import React from 'react'
 export default class NotesList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {notes: []}
+    this.state = {
+      notes: []
+    }
+    this.updateList = this.updateList.bind(this)
   }
   async componentDidMount() {
     const notes = await getNotes()
     console.log('notes', notes)
     this.setState({ notes })
   }
+  updateList(newState) {
+    this.setState({notes: newState})
+  }
   render() {
+    console.log('list renders')
     return (
       <div className="note-container">
         {this.state.notes
@@ -26,17 +33,40 @@ export default class NotesList extends React.Component {
             )
           })
         }
-        <NoteForm/>
+        <NoteForm updateList={this.updateList}/>
       </div>
     )
   }
 }
 
 class NoteForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.submitNote = this.submitNote.bind(this)
+  }
+  async submitNote(event) {
+    console.log('Submitted')
+    event.preventDefault()
+    const noteData = extractFormData(event)
+    console.log('note data: ', noteData)
+    const response = await fetch('http://localhost:3000/note-submit-request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(noteData)
+    })
+    const jsonResponse = await response.json()
+    console.log(jsonResponse)
+    const updatedNotes = await getNotes()
+    console.log(updatedNotes)
+    this.props.updateList(updatedNotes)
+  }
   render() {
     return (
       <div className="note-form-container">
-        <form onSubmit={submitNote}>
+        <form onSubmit={this.submitNote}>
           <input name="note-title"></input>
           <br />
           <textarea name="note-content" className="note-form-textarea"></textarea>
@@ -62,21 +92,4 @@ function extractFormData(event) {
     content: form.get('note-content')
   }
   return noteData
-}
-
-async function submitNote(event) {
-  console.log('Submitted')
-  event.preventDefault()
-  const noteData = extractFormData(event)
-  console.log('note data: ', noteData)
-  const response = await fetch('http://localhost:3000/note-submit-request', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(noteData)
-  })
-  const currentId = await response.json()
-  console.log(currentId)
 }
