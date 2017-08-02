@@ -49,3 +49,7 @@ h1 {
 .form-button {
   margin: 10px;
 }
+
+.note-form-textarea {
+  padding: 10px;
+}
