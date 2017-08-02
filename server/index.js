@@ -24,8 +24,8 @@ app.post('/note-submit-request/', (req, res) => {
   noteData.id = current
   incrementNextId()
   knexInsert('notes', noteData)
-    .then(() => {
-      res.sendStatus(201)
+    .then(updatedNotes => {
+      res.status(201).json(updatedNotes)
     })
     .catch(error => console.log(error))
 })
