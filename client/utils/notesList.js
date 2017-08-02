@@ -65,12 +65,12 @@ class NoteForm extends React.Component {
     return (
       <div className="note-form-container">
         <form onSubmit={this.submitNote}>
-          <input name="note-title" placeholder="Note Title"></input>
+          <input name="note-title" className="note-form-title" placeholder="Note Title"></input>
           <br />
-          <textarea name="note-content" className="note-form-textarea" placeholder="Note Text"></textarea>
+          <textarea name="note-content" className="note-form-textarea" cols="70" rows="10"></textarea>
           <br />
-          <button className="btn btn-default" type="button">Cancel</button>
-          <button className="btn btn-default" type="submit">Submit</button>
+          <button className="btn btn-default form-button" type="button">Cancel</button>
+          <button className="btn btn-default form-button" type="submit">Submit</button>
         </form>
       </div>
     )
