@@ -17,6 +17,7 @@ export default class NotesComponent extends React.Component {
     this.setState({notes: newState})
   }
   render() {
+    console.log('Main Component renders')
     return (
       <div>
         <NotesList notes={this.state.notes} updateList={this.updateList}/>
@@ -37,6 +38,12 @@ class NotesList extends React.Component {
       method: 'DELETE'
     })
     console.log(response)
+    const notesList = this.props.notes
+    const deleteIndex = notesList.findIndex(note => note.id === parseInt(noteToDelete, 10))
+    console.log('delete index: ', deleteIndex)
+    const updatedNotes = [...notesList.slice(0, deleteIndex), ...notesList.slice(deleteIndex + 1, notesList.length)]
+    console.log(updatedNotes)
+    this.props.updateList(updatedNotes)
   }
   render() {
     console.log('prop notes ', this.props.notes)
