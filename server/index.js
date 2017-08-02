@@ -23,7 +23,7 @@ app.post('/note-submit-request/', async (req, res) => {
   const noteData = req.body
   noteData.id = current
   incrementNextId()
-  const updatedNotes = knexInsert('notes', noteData)
+  const updatedNotes = await knexInsert('notes', noteData)
   res.status(201).json(updatedNotes)
 })
 
