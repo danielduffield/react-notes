@@ -1,5 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import NotesList from './utils/notesList.js'
+import NotesComponent from './utils/notesComponent.js'
 
-render(<NotesList />, document.getElementById('note-list'))
+render(<NotesComponent />, document.getElementById('note-list'))
