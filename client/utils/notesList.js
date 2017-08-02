@@ -62,6 +62,7 @@ class NoteForm extends React.Component {
   render() {
     return (
       <div className="note-form-container">
+        <h4>Submit a New Note</h4>
         <form onSubmit={this.submitNote}>
           <input name="note-title" className="note-form-title"
             placeholder="Note Title" maxLength="30" required={true}></input>
@@ -69,7 +70,6 @@ class NoteForm extends React.Component {
           <textarea name="note-content" className="note-form-textarea"
             maxLength="200" cols="70" rows="10" required={true}></textarea>
           <br />
-          <button className="btn btn-default form-button" type="button">Cancel</button>
           <button className="btn btn-default form-button" type="submit">Submit</button>
         </form>
       </div>
