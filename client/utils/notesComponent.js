@@ -40,9 +40,7 @@ class NotesList extends React.Component {
     console.log(response)
     const notesList = this.props.notes
     const deleteIndex = notesList.findIndex(note => note.id === parseInt(noteToDelete, 10))
-    console.log('delete index: ', deleteIndex)
     const updatedNotes = [...notesList.slice(0, deleteIndex), ...notesList.slice(deleteIndex + 1, notesList.length)]
-    console.log(updatedNotes)
     this.props.updateList(updatedNotes)
   }
   render() {
@@ -74,7 +72,13 @@ class NotesList extends React.Component {
 class NoteForm extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      content: '',
+      title: ''
+    }
     this.submitNote = this.submitNote.bind(this)
+    this.updateContentState = this.updateContentState.bind(this)
+    this.updateTitleState = this.updateTitleState.bind(this)
   }
   async submitNote(event) {
     console.log('Submitted')
@@ -90,6 +94,16 @@ class NoteForm extends React.Component {
     })
     const insertedNote = await response.json()
     this.props.updateList([...this.props.notes, ...insertedNote])
+    this.setState({content: ''})
+    this.setState({title: ''})
+  }
+  updateContentState(event) {
+    this.setState({ content: event.target.value })
+  }
+  updateTitleState(event) {
+    this.setState({ title: event.target.value })
+    console.log('title ', this.state.title)
+    console.log('content', this.state.content)
   }
   render() {
     return (
@@ -97,10 +111,12 @@ class NoteForm extends React.Component {
         <h4>Submit a New Note</h4>
         <form onSubmit={this.submitNote}>
           <input name="note-title" className="note-form-title"
-            placeholder="Note Title" maxLength="30" required={true}></input>
+            placeholder="Note Title" maxLength="30" onChange={this.updateTitleState}
+            value={this.state.title} required={true}></input>
           <br />
           <textarea name="note-content" className="note-form-textarea"
-            maxLength="200" cols="70" rows="10" required={true}></textarea>
+            maxLength="200" cols="70" rows="10" onChange={this.updateContentState}
+            value={this.state.content} required={true}></textarea>
           <br />
           <button className="btn btn-default form-button" type="submit">Submit</button>
         </form>
