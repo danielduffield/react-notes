@@ -56,8 +56,6 @@ class NoteForm extends React.Component {
       },
       body: JSON.stringify(noteData)
     })
-    const jsonResponse = await response.json()
-    console.log(jsonResponse)
     const updatedNotes = await getNotes()
     this.props.updateList(updatedNotes)
   }
