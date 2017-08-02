@@ -57,3 +57,7 @@ h1 {
 .hidden {
   display: none;
 }
+
+.delete-button {
+  float: right;
+}

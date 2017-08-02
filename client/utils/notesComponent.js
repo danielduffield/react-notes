@@ -35,7 +35,12 @@ class NotesList extends React.Component {
           .map((note, index) => {
             return (
               <div className="note-container" key={index}>
-                <h4 className="note-title"><span className="note-id">#{note.id}</span>{note.title}</h4>
+                <h4 className="note-title">
+                  <span className="note-id">#{note.id}</span>
+                  {note.title}
+                  <button id={'note-' + note.id + '-delete-btn'} type="button"
+                    className="delete-button">X</button>
+                </h4>
                 <div className="note-text-container">
                   <p className="note-content">{note.content}</p>
                 </div>
