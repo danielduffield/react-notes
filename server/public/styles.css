@@ -37,7 +37,7 @@ h1 {
 
 .note-form-title {
   width: 300px;
-  margin: 20px 0;
+  margin: 10px 0 20px;
   text-align: center;
 }
 
@@ -52,4 +52,8 @@ h1 {
 
 .note-form-textarea {
   padding: 10px;
+}
+
+.hidden {
+  display: none;
 }
