@@ -7,8 +7,8 @@ function knexSelectAll(database) {
   return knex.select().from(database)
 }
 
-function knexInsert(database, noteData) {
-  return knex.insert(noteData).into(database)
+function knexInsert(table, noteData) {
+  return knex.insert(noteData).into(table)
 }
 
 module.exports = {
