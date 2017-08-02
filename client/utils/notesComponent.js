@@ -57,7 +57,6 @@ class NoteForm extends React.Component {
     console.log('Submitted')
     event.preventDefault()
     const noteData = extractFormData(event)
-    console.log('note data: ', noteData)
     const response = await fetch('http://localhost:3000/note-submit-request', {
       method: 'POST',
       headers: {
