@@ -4,14 +4,15 @@ const jsonParser = bodyParser.json()
 const express = require('express')
 const app = express()
 
-const notes = require('./utils/notes.js')
-const { getNextNoteId } = require('./utils/noteId.js')
+const getNotes = require('./utils/getNotes.js')
+const { getNextNoteId, incrementNextId } = require('./utils/noteId.js')
+const { knexInsert } = require('./utils/knexCommands.js')
 
 app.use(jsonParser)
 app.use(express.static('server/public'))
 
 app.get('/notes/', async (req, res) => {
-  const noteList = await notes
+  const noteList = await getNotes()
   const jsonNotes = JSON.stringify(noteList)
 
   res.send(jsonNotes)
@@ -19,7 +20,16 @@ app.get('/notes/', async (req, res) => {
 
 app.post('/note-submit-request/', (req, res) => {
   const current = getNextNoteId()
-  res.status(201).json(current)
+  const noteData = req.body
+  noteData.id = current
+  incrementNextId()
+  console.log(noteData)
+  knexInsert('notes', noteData)
+    .then(() => {
+      console.log('Knex Insertion completed')
+      res.sendStatus(201)
+    })
+    .catch(error => console.log(error))
 })
 
 app.listen(3000, () => console.log('Listening on 3000...'))
