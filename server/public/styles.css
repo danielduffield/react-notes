@@ -34,3 +34,26 @@ h1 {
   border: 1px solid darkgrey;
   background-color: palegoldenrod;
 }
+
+.note-form-title {
+  width: 300px;
+  margin: 10px 0 20px;
+  text-align: center;
+}
+
+.note-form-container {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.form-button {
+  margin: 10px;
+}
+
+.note-form-textarea {
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}

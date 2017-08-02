@@ -5,4 +5,4 @@ async function getNotes() {
   return notes
 }
 
-module.exports = getNotes()
+module.exports = getNotes
