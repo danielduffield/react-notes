@@ -8,6 +8,7 @@
     "lint:html": "htmlhint ./**/*.html",
     "lint:css": "stylelint ./**/*.css",
     "lint:js": "eslint ./**/*.js",
+    "mocha:test": "mocha test -R nyan",
     "test": "npm run lint",
     "precommit": "npm test",
     "bundle": "browserify -t babelify client/main.js -o server/public/bundle.js",
