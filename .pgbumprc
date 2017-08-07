@@ -1,4 +1,0 @@
-{
-  "connectionVar": "POSTGRES_URL",
-  "files": "./migrations"
-}

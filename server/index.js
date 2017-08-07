@@ -20,7 +20,7 @@ app.get('/notes/', async (req, res) => {
   res.send(jsonNotes)
 })
 
-app.post('/note-submit-request/', async (req, res) => {
+app.post('/note-submit-request', async (req, res) => {
   const current = getNextNoteId()
   const noteData = req.body
   noteData.id = current
