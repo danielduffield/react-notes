@@ -22,6 +22,7 @@
 
     "herok-postbuild": "npm run db:make && npm run db:up",
     "postinstall": "browserify -t babelify client/main.js -o server/public/bundle.js",
+    "start": "node server/index.js",
 
     "mocha:test": "mocha test -R nyan",
 
