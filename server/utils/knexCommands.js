@@ -1,6 +1,6 @@
 const knex = require('knex')({
   dialect: 'pg',
-  connection: process.env.POSTGRES_URL
+  connection: process.env.DATABASE_URL
 })
 
 function knexSelectAll(table) {
