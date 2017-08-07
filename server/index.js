@@ -36,4 +36,4 @@ app.delete('/delete-note/:id', (req, res) => {
   })
 })
 
-app.listen(process.env.LISTEN_PORT, () => console.log('Listening on 3000...'))
+app.listen(process.env.PORT, () => console.log('Listening on 3000...'))
