@@ -28,7 +28,7 @@ describe('notes component containing the NotesList and NoteForm', () => {
 function requestNotes() {
   return new Promise((resolve, reject) => {
     request.get('http://localhost:3000/notes/', (err, response, body) => {
-      if (err) return reject(new Error('Unable to acquire notes'))
+      if (err) return reject(new Error(err))
       return resolve(response)
     })
   })
