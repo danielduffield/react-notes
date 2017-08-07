@@ -34,7 +34,7 @@ class NotesList extends React.Component {
   }
   async deleteNote(event) {
     const noteToDelete = event.target.dataset.noteid
-    const response = await fetch('http://localhost:3000/delete-note/' + noteToDelete, {
+    const response = await fetch('/delete-note/' + noteToDelete, {
       method: 'DELETE'
     })
     console.log(response)
@@ -84,7 +84,7 @@ class NoteForm extends React.Component {
     console.log('Submitted')
     event.preventDefault()
     const noteData = extractFormData(event)
-    const response = await fetch('http://localhost:3000/note-submit-request', {
+    const response = await fetch('/note-submit-request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ class NoteForm extends React.Component {
 }
 
 async function getNotes() {
-  const fetchedNotes = await fetch('http://localhost:3000/notes/')
+  const fetchedNotes = await fetch('/notes/')
   const notes = await fetchedNotes.json()
   return notes
 }
