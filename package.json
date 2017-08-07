@@ -1,5 +1,8 @@
 {
   "name": "babelify-react-jsx",
+  "engines": {
+    "node": "8.2.1"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +19,9 @@
     "lint:js": "eslint ./**/*.js",
     "test": "npm run lint",
     "precommit": "npm test",
+
+    "herok-postbuild": "npm run db:make && npm run db:up",
+    "postinstall": "browserify -t babelify client/main.js -o server/public/bundle.js",
 
     "mocha:test": "mocha test -R nyan",
 
